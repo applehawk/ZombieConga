@@ -1,16 +1,13 @@
 import SpriteKit
 
 class GameScene: SKScene {
-  
   var zombie : SKSpriteNode = SKSpriteNode(imageNamed: "zombie1")
   var lastUpdateTime : NSTimeInterval = 0
   var dt: NSTimeInterval = 0
   
   let playableRect: CGRect
-  
   let zombieMovePointsPerSec: CGFloat = 450.0
   let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
-  
   var velocity = CGPoint.zero
   
   override init(size: CGSize) {
@@ -29,18 +26,18 @@ class GameScene: SKScene {
   
   override func didMoveToView(view: SKView) {
     backgroundColor = SKColor.blackColor()
-    
+
     let background = SKSpriteNode(imageNamed: "background1")
     background.zPosition = -1
     background.position = CGPoint(x: size.width/2, y: size.height/2)
-    
+
     zombie.position = CGPoint(x: 400, y: 400);
     zombie.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     zombie.setScale(2)
     addChild(background)
     addChild(zombie)
     spawnEnemy()
-    
+
     debugDrawPlayableArea()
   }
   
@@ -61,11 +58,11 @@ class GameScene: SKScene {
       dt = 0
     }
     lastUpdateTime = currentTime
-    
+
     moveSprite(zombie, velocity: velocity)
     rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
     boundsCheckZombie()
-    
+
     print("\(dt*1000) milliseconds since last update");
   }
 }
